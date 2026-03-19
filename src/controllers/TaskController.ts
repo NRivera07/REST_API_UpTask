@@ -52,7 +52,10 @@ export class TaskController {
         const error = new Error("La tarea no pertenece a este proyecto");
         return res.status(400).json({ error: error.message });
       }
-      res.json(task);
+      task.name = req.body.name || task.name;
+      task.description = req.body.description || task.description;
+      await task.save();
+      res.send("Tarea actualizada");
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
