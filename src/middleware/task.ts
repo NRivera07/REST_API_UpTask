@@ -26,3 +26,15 @@ export async function taskExists(
     res.status(500).json({ error: "Hubo un error" });
   }
 }
+
+export function taskBeLongsToProject(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (req.task.project.toString() !== req.project._id.toString()) {
+    const error = new Error("La tarea no pertenece a este proyecto");
+    return res.status(400).json({ error: error.message });
+  }
+  next();
+}
