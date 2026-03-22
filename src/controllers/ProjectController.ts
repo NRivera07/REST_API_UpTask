@@ -59,6 +59,7 @@ export class ProjectController {
 
     try {
       await project.save();
+      res.send("Proyecto creado correctamente");
     } catch (error) {
       console.log(error);
     }
