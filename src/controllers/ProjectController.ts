@@ -35,6 +35,7 @@ export class ProjectController {
       }
 
       await project.save();
+      res.send("Proyecto actualizado correctamente");
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +51,7 @@ export class ProjectController {
       }
 
       await project.save();
+      res.send("Proyecto eliminado correctamente");
     } catch (error) {
       console.log(error);
     }
