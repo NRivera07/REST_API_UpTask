@@ -44,13 +44,13 @@ export class ProjectController {
     try {
       const { id } = req.params;
 
-      const project = await Project.findByIdAndDelete(id);
+      const project = await Project.findById(id);
       if (!project) {
         const error = new Error("Proyecto no econtrado");
         return res.status(404).json({ error: error.message });
       }
 
-      await project.save();
+      await project.deleteOne();
       res.send("Proyecto eliminado correctamente");
     } catch (error) {
       console.log(error);
