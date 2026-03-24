@@ -10,6 +10,7 @@ export class TaskController {
 
       console.log(task);
       await Promise.allSettled([task.save(), req.project.save()]);
+      res.send("Tarea creada correctamente");
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
