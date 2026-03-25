@@ -32,7 +32,7 @@ export function taskBeLongsToProject(
   res: Response,
   next: NextFunction
 ) {
-  if (req.task.project.toString() !== req.project._id.toString()) {
+  if (req.task.project._id.toString() !== req.project._id.toString()) {
     const error = new Error("La tarea no pertenece a este proyecto");
     return res.status(400).json({ error: error.message });
   }
