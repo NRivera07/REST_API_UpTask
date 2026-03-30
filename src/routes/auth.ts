@@ -17,6 +17,7 @@ router.post(
     if (value !== req.body.password) {
       throw new Error("Las contraseñas no coinciden");
     }
+    return true
   }),
   body("email")
     .isEmail()

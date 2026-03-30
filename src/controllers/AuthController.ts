@@ -1,9 +1,21 @@
+import { Request, Response } from "express";
+import { User } from "../models/User";
+import { hashPassword } from "../utils/auth";
+
 export class AutController {
-    static createAccount(req, res) {
-        try {
-            
-        } catch (error) {
-            
-        }
+  static createAccount = async (req: Request, res: Response) => {
+    try {
+      const { password } = req.body;
+      const user = new User(req.body);
+
+      user.password = await hashPassword(password);
+      await user.save();
+
+      res.send(
+        "Usuario creado correctamente, verifica tu correo para confirma la cuenta"
+      );
+    } catch (error) {
+      res.status(400).json({ error: "Error al crear el usuario" });
     }
+  };
 }
