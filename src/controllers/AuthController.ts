@@ -5,7 +5,14 @@ import { hashPassword } from "../utils/auth";
 export class AutController {
   static createAccount = async (req: Request, res: Response) => {
     try {
-      const { password } = req.body;
+      const { password, email } = req.body;
+
+      const userExist = await User.findOne({ email });
+
+      if (userExist) {
+        const error = new Error("El usuario ya esta registrado");
+        return res.status(409).json({ error: error.message });
+      }
       const user = new User(req.body);
 
       user.password = await hashPassword(password);
